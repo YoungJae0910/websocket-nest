@@ -19,10 +19,7 @@ export class ChatGateway {
     private readonly userService: UserService,
   ) {}
   @SubscribeMessage('new_chat')
-  async getNewChat(
-    @ConnectedSocket() socket: Socket,
-    @MessageBody() chat: string,
-  ) {
+  async getNewChat(@ConnectedSocket() socket: Socket, @MessageBody() chat: string) {
     const user = await this.userService.findUser(socket.id);
     socket.broadcast.emit(
       'new_chat',

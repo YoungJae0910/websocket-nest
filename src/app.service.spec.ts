@@ -8,6 +8,6 @@ describe('appService', () => {
 
   it('test', () => {
     const str = appService.getHello();
-    expect(str).toBe('Hello World!');
+    expect(str).toBe('Hello World!!');
   });
 });

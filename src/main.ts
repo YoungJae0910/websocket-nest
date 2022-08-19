@@ -12,6 +12,6 @@ async function bootstrap() {
   app.setViewEngine('hbs');
 
   app.use(morgan('tiny'));
-  app.listen(3000);
+  app.listen(process.env.PORT);
 }
 bootstrap();

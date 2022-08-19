@@ -7,7 +7,30 @@ on:
     branches: ['master']
 
 jobs:
-  build:
+  test:
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        node-version: [16.15.1]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependency
+        run: npm ci
+
+      - name: Unit Test
+        run: npm test
+
+  build&Deploy:
+    needs: [test]
+
     runs-on: ubuntu-18.04
 
     strategy:
@@ -23,8 +46,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: npm ci
-
-      - run: npm test
 
       - name: create env file
         working-directory: ./
@@ -45,6 +66,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-2
+
       - name: zip file
         run: zip -r $GITHUB_SHA.zip ./dist ./deploy.sh ./appspec.yml ./.production.env ./package.json ./public ./views
 

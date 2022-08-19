@@ -5,14 +5,8 @@ files:
     destination: /home/ubuntu/build
     overwrite: yes
 
-permissions:
-  - object: /home/ubuntu
-    pattern: '**'
-    owner: ubuntu
-    group: ubuntu
-
 hooks:
   AfterInstall:
     - location: deploy.sh
       timeout: 300
-      runas: ubuntu
+      runas: root

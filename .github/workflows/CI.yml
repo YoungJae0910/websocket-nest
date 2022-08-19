@@ -28,7 +28,7 @@ jobs:
       - name: Unit Test
         run: npm test
 
-  build&Deploy:
+  buildAndDeploy:
     needs: [test]
 
     runs-on: ubuntu-18.04

@@ -33,7 +33,7 @@ jobs:
           echo DB_HOST=${{ secrets.DB_HOST }} >> .production.env
           echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .production.env
           echo PORT=80 >> .production.env
-          cat .env
+          cat .production.env
 
       - name: build server files
         working-directory: ./

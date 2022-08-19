@@ -49,3 +49,10 @@ jobs:
 
       - name: Upload to S3
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://junho-cicd-s3/$GITHUB_SHA.zip
+
+      - name: deploy with AWS codeDeploy
+        run: aws deploy create-deployment
+          --application-name websocket-nest
+          --deployment-config-name CodeDeployDefault.OneAtATime
+          --deployment-group-name junho-deploy-group
+          --s3-location bucket=junho-cicd-s3,bundleType=zip,key=$GITHUB_SHA.zip

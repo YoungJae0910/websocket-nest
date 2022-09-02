@@ -13,5 +13,6 @@ async function bootstrap() {
 
   app.use(morgan('tiny'));
   app.listen(process.env.PORT);
+  console.log(process.env.DB_HOST + '****************');
 }
 bootstrap();

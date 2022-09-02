@@ -8,7 +8,7 @@ const NODE_ENV = document.getElementById('env').innerText;
 if (NODE_ENV === 'local') {
   Url = 'http://localhost';
 } else if (NODE_ENV === 'dev') {
-  Url = 'ec2-15-164-163-243.ap-northeast-2.compute.amazonaws.com';
+  Url = 'http://ec2-15-164-163-243.ap-northeast-2.compute.amazonaws.com';
 } else {
   Url = 'ec2 prod server';
 }
@@ -53,7 +53,7 @@ const handleREST = () => {
   const restList = document.getElementById('rest');
 
   getOneChatBtn.addEventListener('click', () => {
-    axios.get('http://localhost:8080/chat/14').then((res) => {
+    axios.get(`${Url}/chat/14`).then((res) => {
       removeAllChats();
       const ele = document.createElement('div');
       ele.innerText = res.data.content;
@@ -62,7 +62,7 @@ const handleREST = () => {
   });
 
   getAllChatBtn.addEventListener('click', () => {
-    axios.get('http://localhost:8080/chat').then((res) => {
+    axios.get(`${Url}/chat`).then((res) => {
       removeAllChats();
       for (const chat of res.data) {
         const ele = document.createElement('div');

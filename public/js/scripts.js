@@ -8,7 +8,7 @@ const NODE_ENV = document.getElementById('env').innerText;
 if (NODE_ENV === 'local') {
   Url = 'http://localhost';
 } else if (NODE_ENV === 'dev') {
-  Url = 'ec2 server';
+  Url = 'ec2-15-164-163-243.ap-northeast-2.compute.amazonaws.com';
 } else {
   Url = 'ec2 prod server';
 }

@@ -8,6 +8,8 @@ export class AppController {
   @Get()
   @Render('index')
   renderIndex() {
-    return;
+    return {
+      env: process.env.NODE_ENV,
+    };
   }
 }

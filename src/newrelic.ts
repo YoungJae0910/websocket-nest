@@ -13,7 +13,7 @@ const config = {
   /**
    * Your New Relic license key.
    */
-  license_key: '51a090f6019090e336411ed37947d1c0d14eNRAL',
+  license_key: process.env.NEWRELIC,
   logging: {
     /**
      * Level at which to log. 'trace' is most useful to New Relic when diagnosing

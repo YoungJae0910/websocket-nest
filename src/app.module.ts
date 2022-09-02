@@ -7,10 +7,20 @@ import { UserModule } from './user/user.module';
 import { RoomModule } from './room/room.module';
 import { ChatModule } from './chat/chat.module';
 
+const returnEnvPath = () => {
+  if (process.env.NODE_ENV === 'local') {
+    return '.local.env';
+  } else if (process.env.NODE_ENV === 'dev') {
+    return '.development.env';
+  } else {
+    return '.production.env';
+  }
+};
+
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: process.env.NODE_ENV === 'development' ? '.development.env' : '.production.env',
+      envFilePath: returnEnvPath(),
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',

@@ -3,7 +3,12 @@ REPOSITORY=/home/ec2-user/build
 
 cd $REPOSITORY
 
-sudo su
-npm i
-pm2 kill
-npm run start:dev
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+sudo npm i
+
+sudo pm2 kill
+
+sudo npm run start:dev

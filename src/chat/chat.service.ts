@@ -22,4 +22,24 @@ export class ChatService {
       return user;
     }
   }
+
+  async getOneChat(chatId: number) {
+    return await this.chatRepository.findOne({
+      where: {
+        id: chatId,
+      },
+    });
+  }
+
+  async getAllChat() {
+    const result = await this.chatRepository.find({
+      relations: ['user'],
+      where: {
+        user: {
+          id: 10,
+        },
+      },
+    });
+    return result;
+  }
 }

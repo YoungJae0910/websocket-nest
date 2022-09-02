@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const socket = io('/');
 
 let userColor = '';
@@ -29,6 +30,44 @@ handleChats = () => {
   });
 };
 
+const removeAllChats = () => {
+  const restList = document.getElementById('rest');
+  while (restList.firstChild) {
+    restList.removeChild(restList.firstChild);
+  }
+};
+
+const handleREST = () => {
+  const getOneChatBtn = document.getElementById('one');
+  const getAllChatBtn = document.getElementById('all');
+  const deleteBtn = document.getElementById('xx');
+  const restList = document.getElementById('rest');
+
+  getOneChatBtn.addEventListener('click', () => {
+    axios.get('http://localhost:8080/chat/14').then((res) => {
+      removeAllChats();
+      const ele = document.createElement('div');
+      ele.innerText = res.data.content;
+      restList.appendChild(ele);
+    });
+  });
+
+  getAllChatBtn.addEventListener('click', () => {
+    axios.get('http://localhost:8080/chat').then((res) => {
+      removeAllChats();
+      for (const chat of res.data) {
+        const ele = document.createElement('div');
+        ele.innerText = chat.content;
+        restList.appendChild(ele);
+      }
+    });
+  });
+
+  deleteBtn.addEventListener('click', () => {
+    removeAllChats();
+  });
+};
+
 const init = () => {
   const name = prompt('What is your name?');
   username = name;
@@ -36,6 +75,7 @@ const init = () => {
     userColor = user.color;
   });
   handleChats();
+  handleREST();
 };
 
 init();

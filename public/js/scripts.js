@@ -6,7 +6,7 @@ let username = '';
 let Url = '';
 const NODE_ENV = document.getElementById('env').innerText;
 if (NODE_ENV === 'local') {
-  Url = 'http://localhost';
+  Url = 'http://localhost:8080';
 } else if (NODE_ENV === 'dev') {
   Url = 'http://ec2-15-164-163-243.ap-northeast-2.compute.amazonaws.com';
 } else {

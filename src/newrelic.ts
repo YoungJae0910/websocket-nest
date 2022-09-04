@@ -1,11 +1,11 @@
-'use strict';
+'use strict'
 /**
  * New Relic agent configuration.
  *
  * See lib/config/default.js in the agent distribution for a more complete
  * description of configuration variables and their potential values.
  */
-const config = {
+exports.config = {
   /**
    * Array of application names.
    */
@@ -13,14 +13,14 @@ const config = {
   /**
    * Your New Relic license key.
    */
-  license_key: process.env.NEWRELIC,
+  license_key: '51a090f6019090e336411ed37947d1c0d14eNRAL',
   logging: {
     /**
      * Level at which to log. 'trace' is most useful to New Relic when diagnosing
      * issues with the agent, 'info' and higher will impose the least overhead on
      * production applications.
      */
-    level: 'info',
+    level: 'info'
   },
   /**
    * When true, all request headers except for those listed in attributes.exclude
@@ -33,8 +33,8 @@ const config = {
       /**
        * Toggles whether the agent gathers log records for sending to New Relic.
        */
-      enabled: true,
-    },
+      enabled: true
+    }
   },
   attributes: {
     /**
@@ -55,9 +55,7 @@ const config = {
       'response.headers.authorization',
       'response.headers.proxyAuthorization',
       'response.headers.setCookie*',
-      'response.headers.x*',
-    ],
-  },
-};
-
-export default config;
+      'response.headers.x*'
+    ]
+  }
+}

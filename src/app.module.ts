@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { RoomModule } from './room/room.module';
 import { ChatModule } from './chat/chat.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { NewrelicInterceptor } from './newrelic.interceptor';
 
 const returnEnvPath = () => {
   if (process.env.NODE_ENV === 'local') {
@@ -37,6 +39,12 @@ const returnEnvPath = () => {
     ChatModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: NewrelicInterceptor,
+    },
+  ],
 })
 export class AppModule {}

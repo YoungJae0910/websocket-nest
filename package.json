@@ -11,6 +11,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:local": "NODE_ENV=local nest start --watch",
+    "start:locals": "NODE_ENV=local SEC=true nest start --watch",
     "start:dev": "NODE_ENV=dev pm2 start ./dist/main.js -f",
     "start:debug": "nest start --debug --watch",
     "start:prod": "NODE_ENV=prod pm2 start ./dist/main.js -f",
@@ -32,6 +33,7 @@
     "@nestjs/serve-static": "^2.2.2",
     "@nestjs/typeorm": "^9.0.0",
     "@nestjs/websockets": "^8.4.7",
+    "@socket.io/redis-adapter": "^7.2.0",
     "@types/color-hash": "^1.0.2",
     "@types/morgan": "^1.9.3",
     "cache-manager": "^4.1.0",
@@ -48,7 +50,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "socket.io": "^4.5.1",
+    "socket.io": "^4.5.2",
     "typeorm": "^0.3.7"
   },
   "devDependencies": {

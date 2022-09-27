@@ -12,6 +12,7 @@ import { ChatService } from './chat.service';
   cors: {
     origin: '*',
   },
+  transports: ['websocket'],
 })
 export class ChatGateway {
   constructor(

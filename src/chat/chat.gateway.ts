@@ -29,6 +29,6 @@ export class ChatGateway {
         userColor: user.color,
       }),
     );
-    this.chatService.createChat(chat, socket.id);
+    await this.chatService.createChat(chat, socket.id);
   }
 }

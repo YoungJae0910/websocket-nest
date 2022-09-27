@@ -1,13 +1,12 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import * as redisStore from 'cache-manager-redis-store';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { RoomModule } from './room/room.module';
 import { ChatModule } from './chat/chat.module';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-import { NewrelicInterceptor } from './newrelic.interceptor';
 
 const returnEnvPath = () => {
   if (process.env.NODE_ENV === 'local') {
@@ -37,14 +36,13 @@ const returnEnvPath = () => {
     UserModule,
     RoomModule,
     ChatModule,
+    CacheModule.register({
+      store: redisStore,
+      host: 'localhost',
+      port: '6379',
+    }),
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: NewrelicInterceptor,
-    },
-  ],
+  providers: [AppService],
 })
 export class AppModule {}

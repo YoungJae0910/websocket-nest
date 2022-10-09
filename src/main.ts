@@ -21,6 +21,7 @@ async function bootstrap() {
     app.listen(8081);
   } else {
     app.listen(process.env.PORT);
+    console.log(`listen port ${process.env.PORT}`);
   }
 }
 bootstrap();

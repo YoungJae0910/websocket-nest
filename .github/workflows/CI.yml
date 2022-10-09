@@ -45,7 +45,7 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: zip file
-        run: zip -r $GITHUB_SHA.zip ./dist ./deploy.sh ./appspec.yml ./.development.env ./package.json ./public ./views
+        run: zip -r deploy.zip ./dist ./deploy.sh ./appspec.yml ./.development.env ./package.json ./public ./views
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v14
@@ -56,4 +56,4 @@ jobs:
           environment_name: Junhocicdeb-env
           region: ap-northeast-2
           version_label: ${{github.SHA}}
-          deployment_package: ./$GITHUB_SHA.zip
+          deployment_package: deploy.zip

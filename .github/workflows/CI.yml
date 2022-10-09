@@ -56,4 +56,4 @@ jobs:
           environment_name: Junhocicdeb-env
           region: ap-northeast-2
           version_label: ${{github.SHA}}
-          deployment_package: $GITHUB_SHA.zip
+          deployment_package: ./$GITHUB_SHA.zip

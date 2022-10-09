@@ -53,7 +53,8 @@ jobs:
           touch .development.env
           echo DB_HOST=${{ secrets.DB_HOST }} >> .development.env
           echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .development.env
-          echo PORT=80 >> .development.env
+          echo PORT=8081 >> .development.env
+          echo REDIS_URL=${{secrets.REDIS_URL}} >> .development.env
           cat .development.env
       - name: build server files
         working-directory: ./
@@ -69,12 +70,13 @@ jobs:
       - name: zip file
         run: zip -r $GITHUB_SHA.zip ./dist ./deploy.sh ./appspec.yml ./.development.env ./package.json ./public ./views
 
-      - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://junho-cicd-s3/$GITHUB_SHA.zip
-
-      - name: deploy with AWS codeDeploy
-        run: aws deploy create-deployment
-          --application-name junho-websocket-nest
-          --deployment-config-name CodeDeployDefault.OneAtATime
-          --deployment-group-name junho-deploy-group
-          --s3-location bucket=junho-cicd-s3,bundleType=zip,key=$GITHUB_SHA.zip
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v14
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: junho-cicd-EB
+          environment_name: Junhocicdeb-env
+          region: ap-northeast-2
+          version_label: ${{github.SHA}}
+          deployment_package: $GITHUB_SHA.zip

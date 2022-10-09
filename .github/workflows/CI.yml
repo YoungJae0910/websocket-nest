@@ -7,30 +7,7 @@ on:
     branches: ['master']
 
 jobs:
-  test:
-    runs-on: ubuntu-18.04
-
-    strategy:
-      matrix:
-        node-version: [16.15.1]
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Install Dependency
-        run: npm ci
-
-      - name: Unit Test
-        run: npm test
-
   buildAndDeploy:
-    needs: [test]
-
     runs-on: ubuntu-18.04
 
     strategy:

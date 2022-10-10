@@ -45,7 +45,7 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: zip file
-        run: zip -r deploy.zip ./dist ./.development.env ./package.json ./public ./views ./Profile
+        run: zip -r deploy.zip ./dist ./.development.env ./package.json ./public ./views ./Procfile
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v14

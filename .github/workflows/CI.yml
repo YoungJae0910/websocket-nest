@@ -52,8 +52,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: junho-cicd-EB
-          environment_name: Junhocicdeb-env
+          application_name: websocket-nest-junho-EB
+          environment_name: Websocketnestjunhoeb-env
           region: ap-northeast-2
           version_label: ${{github.SHA}}
           deployment_package: deploy.zip
